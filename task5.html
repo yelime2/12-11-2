@@ -1,0 +1,50 @@
+<!-- 게임 5 (TASK 4 등장 후 7초 후 등장) -->
+<div class="game-layer" id="game5">
+    <div class="game-window" id="gameWindow5">
+        <div class="window-header" id="windowHeader5">
+            <span class="window-title">TASK 5 발표 자료 재배치하기</span>
+            <span class="task-complete" id="taskComplete5" style="display: none;">업무완료</span>
+        </div>
+        <div class="window-content">
+            <div class="game-area" id="gameArea5">
+                <div class="slide-container" id="slideContainer">
+                    <div class="slide-item" data-order="1">
+                        <div class="slide-number">1</div>
+                        <div class="slide-title">표지 — Project A Overview</div>
+                    </div>
+                    <div class="slide-item" data-order="2">
+                        <div class="slide-number">2</div>
+                        <div class="slide-title">목차 — Agenda</div>
+                    </div>
+                    <div class="slide-item" data-order="3">
+                        <div class="slide-number">3</div>
+                        <div class="slide-title">분석 결과 — Key Findings</div>
+                    </div>
+                    <div class="slide-item" data-order="4">
+                        <div class="slide-number">4</div>
+                        <div class="slide-title">개선안 — Proposed Solution</div>
+                    </div>
+                    <div class="slide-item" data-order="5">
+                        <div class="slide-number">5</div>
+                        <div class="slide-title">마무리 — Next Steps & Q/A</div>
+                    </div>
+                </div>
+                <button id="completeTask5Btn" onclick="completeTask5()" class="send-btn">완료</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 알림 창 5 (게임 설명) -->
+<div class="info-panel" id="infoPanel5">
+    <div class="info-header">
+        <span class="info-title">NOTICE 5</span>
+        <button class="minimize-btn" onclick="toggleInfoPanel5()">_</button>
+    </div>
+    <div class="info-content" id="infoContent5">
+        <div class="notification-item">
+            <p class="notification-message">발표 자료 슬라이드를 올바른 순서로 재배치해 발표 준비를 완료해주세요.<br>정답 순서:<br>표지 — Project A Overview<br>목차 — Agenda<br>분석 결과 — Key Findings<br>개선안 — Proposed Solution<br>마무리 — Next Steps & Q/A</p>
+        </div>
+    </div>
+</div>
+

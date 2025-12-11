@@ -1,0 +1,33 @@
+<!-- 게임 3 (TASK 2 등장 후 7초 후 등장) -->
+<div class="game-layer" id="game3">
+    <div class="game-window" id="gameWindow3">
+        <div class="window-header" id="windowHeader3">
+            <span class="window-title">TASK 3 오탈자 수정하기</span>
+            <span class="task-complete" id="taskComplete3" style="display: none;">업무완료</span>
+        </div>
+        <div class="window-content">
+            <div class="game-area" id="gameArea3">
+                <div style="padding: 20px; font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 17px; line-height: 1.8; color: #333;">
+                    <div id="task3Text" contenteditable="true" style="margin-bottom: 30px; min-height: 150px; border: 1px solid #7d00ff; padding: 15px; background: white; white-space: pre-wrap;">금주 마케팅 내용을 정리하엿습니다.
+새로운 고객 층 반응이 예쌍보다 긍정적이엿으며,
+추가 분석 자료는 내일 중으로 공유드리갰습니다.</div>
+                    <button id="completeTask3Btn" onclick="completeTask3()" class="send-btn">수정 완료</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 알림 창 3 (게임 설명) -->
+<div class="info-panel" id="infoPanel3">
+    <div class="info-header">
+        <span class="info-title">NOTICE 3</span>
+        <button class="minimize-btn" onclick="toggleInfoPanel3()">_</button>
+    </div>
+    <div class="info-content" id="infoContent3">
+        <div class="notification-item">
+            <p class="notification-message">보고서에서 잘못된 철자를 모두 수정하세요. 수정이 완료되면 수정 완료 버튼을 누르세요.</p>
+        </div>
+    </div>
+</div>
+

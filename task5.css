@@ -1,0 +1,239 @@
+/* 게임 5용 스타일 */
+
+* {
+    user-select: none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+body {
+    background: #b0b0b0;
+    user-select: none;
+}
+
+/* 게임 레이어 */
+.game-layer {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+/* 게임 윈도우 스타일 (task5 전용) */
+#gameWindow5 {
+    width: 500px;
+    height: 500px;
+    background: white;
+    border-radius: 0px;
+    border: 1.2px solid #7d00ff;
+    box-shadow: 0 10px 40px rgba(177, 177, 177, 0.698);
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#gameWindow5.dragging {
+    cursor: grabbing;
+    z-index: 1000;
+}
+
+#gameWindow5.collapsed {
+    border: 1.2px solid #000000;
+}
+
+/* 윈도우 헤더 (드래그 가능한 영역) - task5 전용 */
+#gameWindow5 .window-header {
+    background: #7d00ff;
+    color: rgb(0, 0, 0);
+    padding: 12px 16px;
+    cursor: move;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+#gameWindow5 .window-header:hover {
+    background: #6600d3;
+}
+
+#gameWindow5 .window-title {
+    flex: 1;
+    color: #ffffff;
+}
+
+#gameWindow5 .task-complete {
+    font-size: 17px;
+    font-weight: 400;
+    margin-left: 10px;
+    color: #ffffff !important;
+}
+
+/* 윈도우 내용 영역 */
+#gameWindow5 .window-content {
+    flex: 1;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: white;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+#gameWindow5 .window-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+#gameWindow5 .game-area {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+#gameWindow5 .game-area::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* 슬라이드 컨테이너 */
+.slide-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* 슬라이드 아이템 */
+.slide-item {
+    width: 100%;
+    min-height: 60px;
+    background: #f5f5f5;
+    border: 1px solid #7d00ff;
+    border-radius: 0px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: move;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    user-select: none;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.slide-item:hover {
+    background: #e8e8e8;
+    border-color: #6600d3;
+}
+
+.slide-item.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+    z-index: 1000;
+    transform: none !important;
+    position: relative !important;
+}
+
+.slide-item.drag-over {
+    border-color: #00ff00;
+    background: #e8f5e9;
+}
+
+/* 슬라이드 번호 */
+.slide-number {
+    width: 30px;
+    height: 30px;
+    background: #7d00ff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    flex-shrink: 0;
+}
+
+/* 슬라이드 제목 */
+.slide-title {
+    flex: 1;
+    font-size: 16px;
+    color: #7d00ff;
+    font-weight: 400;
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+}
+
+/* 완료 버튼 */
+#completeTask5Btn {
+    margin-top: 10px;
+    padding: 10px 30px;
+    background: #7d00ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    transition: background 0.2s ease;
+}
+
+#completeTask5Btn:hover {
+    background: #6600d3;
+}
+
+#completeTask5Btn:active {
+    background: #5500b3;
+}
+
+/* 알림 창 스타일 */
+.notification-message {
+    margin: 0 0 8px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 400;
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+}
+
+/* 알림 패널 스타일 (infoPanel5는 왼쪽에 위치) */
+#infoPanel5 {
+    position: fixed;
+    top: 560px;
+    left: 20px;
+    right: auto;
+    width: 300px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(177, 177, 177, 0.698);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px;
+    border: 1.2px solid #000000;
+    transition: width 0.3s ease, height 0.3s ease;
+    overflow: hidden;
+}
+
+#infoPanel5.dragging {
+    cursor: grabbing;
+    z-index: 1001;
+}
+

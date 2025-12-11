@@ -1,0 +1,46 @@
+<!-- 게임 2 (7초 후 등장) -->
+<div class="game-layer" id="game2">
+    <div class="game-window" id="gameWindow2">
+        <div class="window-header" id="windowHeader2">
+            <span class="window-title">TASK 2 회의 날짜 선택하기</span>
+            <span class="task-complete" id="taskComplete2" style="display: none;">업무완료</span>
+        </div>
+        <div class="window-content">
+            <div class="game-area" id="gameArea2">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="calendar-nav-btn" id="prevMonth">‹</button>
+                        <h3 class="calendar-title" id="calendarTitle">2025년 1월</h3>
+                        <button class="calendar-nav-btn" id="nextMonth">›</button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div class="weekday">일</div>
+                        <div class="weekday">월</div>
+                        <div class="weekday">화</div>
+                        <div class="weekday">수</div>
+                        <div class="weekday">목</div>
+                        <div class="weekday">금</div>
+                        <div class="weekday">토</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDays">
+                        <!-- 날짜들이 여기에 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 알림 창 2 (게임 설명) -->
+<div class="info-panel" id="infoPanel2">
+    <div class="info-header">
+        <span class="info-title">NOTICE 2</span>
+        <button class="minimize-btn" onclick="toggleInfoPanel2()">_</button>
+    </div>
+    <div class="info-content" id="infoContent2">
+        <div class="notification-item">
+            <p class="notification-message">TASK 1 메일에서 회의 날짜를 확인하고 캘린더에서 해당 날짜를 클릭하세요.</p>
+        </div>
+    </div>
+</div>
+

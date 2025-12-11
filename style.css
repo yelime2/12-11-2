@@ -1,0 +1,794 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-break: keep-all;
+  
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+body {
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-weight: 400;
+    background: #b0b0b0;
+    min-height: 100vh;
+    position: relative;
+    
+}
+
+/* 메인 화면 스타일 */
+.main-screen {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+}
+
+
+.intro-text-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro-text {
+    font-size: 50px;
+    color: #E6FF9A !important;
+    font-weight: 500;
+    margin-bottom: 40px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    line-height: 1.6;
+    text-align: center;
+    position: relative;
+    min-height: 50px;
+}
+
+.intro-text u {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 17px;
+}
+
+.start-btn {
+    background: #b0b0b0;
+    color: #000000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 17px;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+    box-shadow: 0 5px 15px rgba(177, 177, 177, 0.698);
+    opacity: 0;
+    margin-top: 30px;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.start-btn:active {
+    transform: translateY(0);
+}
+
+/* 게임들이 쌓여있는 페이지 스타일 */
+.games-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: #b0b0b0;
+}
+
+/* 타이머 스타일 */
+.timer-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.timer-text {
+    font-size: 50px;
+    color: #000000;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    user-select: none;
+    text-align: center;
+    background: white;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+.timer-text.timer-timeout {
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+/* 시간 종료 모달 스타일 */
+.timer-end-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    gap: 30px;
+}
+
+.timer-end-modal-content {
+    background: white;
+    border: 1px solid #000000;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.timer-end-text {
+    font-size: 24px;
+    color: #000000;
+    font-weight: 400;
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.restart-btn {
+    background: #b0b0b0;
+    color: #000000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 17px;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s ease;
+    box-shadow: 0 5px 15px rgba(177, 177, 177, 0.698);
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-weight: 400;
+}
+
+.restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.restart-btn:active {
+    transform: translateY(0);
+}
+
+.game-layer {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+/* 게임 윈도우 스타일 */
+.game-window {
+    width: 500px;
+    height: 400px;
+    background: white;
+    border-radius: 0px;
+    border: 1.2px solid #7d00ff;
+    box-shadow: 0 10px 40px rgba(177, 177, 177, 0.698);
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    transform: translate(0, 0);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.game-window.dragging {
+    cursor: grabbing;
+    z-index: 1000;
+}
+
+.game-window.collapsed {
+    border: 1.2px solid #000000;
+}
+
+/* 윈도우 헤더 (드래그 가능한 영역) */
+.window-header {
+    background: #7d00ff;
+    color: rgb(0, 0, 0);
+    padding: 12px 16px;
+    cursor: move;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 17px;
+
+}
+
+.window-header:hover {
+    background: #6600d3;
+
+}
+
+.window-title {
+    flex: 1;
+    color: #ffffff;
+}
+
+.task-complete {
+    font-size: 17px;
+    font-weight: 400;
+    margin-left: 10px;
+    color: #ffffff !important;
+}
+
+/* 윈도우 내용 영역 */
+.window-content {
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+    background: white;
+}
+
+.game-area {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 0px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.game-area::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* 이메일 폼 스타일 */
+.email-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgb(255, 255, 255);
+}
+
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1.2px solid #7d00ff;
+}
+
+.email-fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.email-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.email-field label {
+    min-width: 60px;
+    font-size: 17px;
+    color: #7d00ff;
+    font-weight: 400;
+}
+
+.email-field input {
+    flex: 1;
+    border: none;
+    border-bottom: 1.2px solid #7d00ff;
+    padding: 4px 0;
+    font-size: 17px;
+    outline: none;
+    background: transparent;
+    color: #7d00ff;
+}
+
+.email-field input:focus {
+    border-bottom-color: #667eea;
+}
+
+.email-options {
+    display: flex;
+    align-items: center;
+}
+
+.cc-bcc {
+    font-size: 17px;
+    color: #7d00ff;
+    cursor: pointer;
+}
+
+.email-body {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+}
+
+.email-body textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 17px;
+    font-family: inherit;
+    background: transparent;
+    color: #7d00ff;
+}
+
+.email-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-top: 1.2px solid #7d00ff;
+}
+
+.send-btn {
+    background: #7d00ff;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px 24px;
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.send-btn:hover {
+    background: #6600d3;
+}
+
+.send-btn:active {
+    background: #6600d3;
+}
+
+.email-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-icon {
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.action-icon:hover {
+    color: #333;
+}
+
+/* 알림 창 스타일 */
+.info-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(177, 177, 177, 0.698);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px;
+    border: 1.2px solid #000000;
+    transition: width 0.3s ease, height 0.3s ease;
+    overflow: hidden;
+}
+
+.info-panel.dragging {
+    cursor: grabbing;
+    z-index: 1001;
+}
+
+.info-header {
+    background: #E6FF9A;
+    color: rgb(0, 0, 0);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 17px;
+    cursor: move;
+    user-select: none;
+    gap: 8px;
+}
+
+.info-title {
+    flex: 1;
+    text-decoration: underline;
+    text-decoration-color: #000;
+    text-underline-offset: 3px;
+}
+
+.brief-view-btn {
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+    cursor: pointer;
+    padding: 4px 12px;
+    border-radius: 12px;
+    transition: background 0.2s;
+    font-weight: 400;
+}
+
+.brief-view-btn:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.minimize-btn {
+    background: transparent;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.minimize-btn:hover {
+    transform: scale(1.2);
+    color: #666;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+    color: #666;
+}
+
+/* 알림창 축소 상태 */
+.info-panel.minimized {
+    width: 40px !important;
+    height: 40px !important;
+    /* 현재 위치 유지 */
+}
+
+.info-panel.minimized .info-header {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-panel.minimized .info-title {
+    display: none;
+}
+
+.info-panel.minimized .minimize-btn {
+    margin-right: 0;
+}
+
+.info-panel.minimized .close-btn {
+    display: none;
+}
+
+.info-content {
+    background: #E6FF9A;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.info-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.notification-item {
+    padding: 16px;
+    border-bottom: 1.2px solid rgba(0, 0, 0, 0.1);
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-message {
+    margin: 0 0 8px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 400;
+    font-family: 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+}
+
+.info-content p {
+    margin: 0 0 10px 0;
+}
+
+.info-content p:last-child {
+    margin-bottom: 0;
+}
+
+.view-original {
+    color: #7d00ff;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.view-original:hover {
+    color: #7d00ff;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 0px;
+}
+
+.modal-header {
+
+    color: rgb(0, 0, 0);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #7d00ff;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.modal-close:hover {
+    transform: scale(1.2);
+    color: #666;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    color: #333;
+    line-height: 1.6;
+}
+
+.modal-body p {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* 원문 모달 스타일 */
+.original-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.original-modal-content {
+    background: #E6FF9A;
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(177, 177, 177, 0.698);
+    border-radius: 0px;
+    border: 1.2px solid #7d00ff;
+    pointer-events: all;
+    overflow: hidden;
+}
+
+.original-modal-content.dragging {
+    cursor: grabbing;
+    z-index: 1001;
+}
+
+.original-modal-header {
+    background: #9ae8ff;
+    color: rgb(0, 0, 0);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+    cursor: move;
+    user-select: none;
+}
+
+.original-modal-header h3 {
+    margin: 0;
+    font-size: 17px;
+    font-family: 'Apple SD Gothic Neo';
+    font-weight: 400;   
+    color: #7d00ff;
+}
+
+.original-modal-close {
+    background: transparent;
+    border: none;
+    color: #7d00ff;
+    font-size: 17px;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.original-modal-close:hover {
+    transform: scale(1.2);
+    color: #666;
+}
+
+.original-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    color: #7d00ff;
+    line-height: 1.6;
+    background: #9ae8ff;
+    flex: 1;
+    font-size: 17px;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.original-modal-body p {
+    margin: 0;
+    white-space: pre-wrap;
+    font-size: 17px;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.original-modal-body * {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.original-label {
+    font-family: 'Apple SD Gothic Neo';
+    font-weight: 400;
+    color: #7d00ff;
+    text-decoration: underline;
+    text-decoration-color: #7d00ff;
+    text-underline-offset: 3px;
+    font-size: 17px;
+}
